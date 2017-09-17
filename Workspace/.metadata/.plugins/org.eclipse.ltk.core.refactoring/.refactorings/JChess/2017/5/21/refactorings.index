@@ -1,0 +1,3 @@
+1495922447148	Move member 'isValidTileCoordinate'
+1495926756193	Rename local variable 'currentCandidate'
+1495927469100	Change method 'calculateLegalMoves'

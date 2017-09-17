@@ -1,0 +1,34 @@
+1499017771871	Rename field 'EIGHT_COLUMN'
+1499046191877	Copy compilation unit
+1499078028041	Rename local variable 'candidateCoordinateOffset'
+1499078060063	Rename local variable 'candidateCoordinateOffset'
+1499078109636	Rename local variable 'candidateCoordinateOffset'
+1499078126732	Rename local variable 'candidateCoordinateOffset'
+1499078147158	Rename local variable 'candidateCoordinateOffset'
+1499078233589	Rename field 'CANDIDATE_VECTOR_MOVE_COORDINATES'
+1499082744725	Move compilation unit
+1499113443400	Delete element
+1499113463119	Delete elements
+1499177055239	Delete element
+1499220619812	Rename method 'populateMenuBar'
+1499222718269	Rename field 'SECOND_ROW'
+1499222735126	Rename field 'THIRD_ROW'
+1499222747205	Rename field 'FOURTH_ROW'
+1499222756135	Rename field 'FIFTH_ROW'
+1499222767527	Rename field 'SIXTH_ROW'
+1499222776906	Rename field 'SEVENTH_ROW'
+1499222786139	Rename field 'EIGHTH_ROW'
+1499223655514	Rename resource 'black_bishop.png'
+1499223664251	Rename resource 'black_king.png'
+1499223674442	Rename resource 'black_knight.png'
+1499223686469	Rename resource 'black_pawn.png'
+1499223696308	Rename resource 'black_queen.png'
+1499223705545	Rename resource 'black_rook.png'
+1499223713802	Rename resource 'white_bishop.png'
+1499223722096	Rename resource 'white_king.png'
+1499223740844	Rename resource 'white_knight.png'
+1499223754414	Rename resource 'white_pawn.png'
+1499223765624	Rename resource 'white_queen.png'
+1499223773893	Rename resource 'white_rook.png'
+1499225752249	Delete elements
+1499350865404	Delete element

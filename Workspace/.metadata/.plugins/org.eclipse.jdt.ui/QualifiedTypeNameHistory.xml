@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.chess.engine.pieces.Piece"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.chess.engine.board.Tile"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.chess.engine.board.Move"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="com.chess.engine.pieces.Knight"/>
+<fullyQualifiedTypeName name="com.chess.engine.pieces.Bishop"/>
+<fullyQualifiedTypeName name="com.chess.engine.pieces.Queen"/>
+<fullyQualifiedTypeName name="com.chess.engine.pieces.King"/>
+<fullyQualifiedTypeName name="com.chess.engine.pieces.Pawn"/>
+<fullyQualifiedTypeName name="com.chess.engine.board.Board.Builder"/>
+<fullyQualifiedTypeName name="com.google.common.collect.ImmutableList"/>
+<fullyQualifiedTypeName name="com.chess.engine.player.Player"/>
+<fullyQualifiedTypeName name="com.google.common.collect.Iterables"/>
+<fullyQualifiedTypeName name="com.chess.engine.board.Board"/>
+<fullyQualifiedTypeName name="com.chess.gui.Table"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Color"/>
+<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+<fullyQualifiedTypeName name="com.chess.engine.board.Move.MoveFactory"/>
+<fullyQualifiedTypeName name="com.google.common.collect.Lists"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="javax.swing.JCheckBoxMenuItem"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="com.google.common.primitives.Ints"/>
+<fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.chess.engine.board.BoardUtils"/>
+</qualifiedTypeNameHistroy>

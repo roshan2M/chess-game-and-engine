@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;e&apos; in &apos;com.chess.gui.Table.TilePanel.TilePanel(...).new MouseListener() {...}.mouseClicked(...)&apos; to &apos;event&apos;&#x0D;&#x0A;- Original project: &apos;JChess&apos;&#x0D;&#x0A;- Original element: &apos;com.chess.gui.Table.TilePanel.TilePanel(...).new MouseListener() {...}.mouseClicked(MouseEvent).e&apos;&#x0D;&#x0A;- Renamed element: &apos;e&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;e&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.chess.gui{Table.java[Table[TilePanel~TilePanel~QBoardPanel;~I[~mouseClicked~QMouseEvent;@e!4725!4742!4742!4742!QMouseEvent;!16!true" name="event" references="true" stamp="1500274180846" version="1.0"/>
+</session>
