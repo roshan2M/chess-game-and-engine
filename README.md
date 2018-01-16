@@ -7,3 +7,5 @@ I am also currently in the process of developing an engine for this game, which 
 So, calling ```minimax(L)```, where ```L``` is the current layer of move being analyzed, will return the following.
 * If ```player(L) = MIN```, which means ```MIN``` is playing on layer ```L```, then return ```min(result(L,a))``` over all actions ```a```, where ```result(L,a)``` is the next layer of nodes achieved from applying action ```a``` on ```L```.
 * If ```player(L) = MAX```, which means ```MAX``` is playing on layer ```L```, then return ```max(result(L,a))``` over all actions ```a```.
+
+Some optimizations will include ordering the graph (e.g. from lowest on left to highest on right) to make searching for the lowest possible 'score' an easy task. This means entire subtrees will be quickly removed, considering improving time efficiency. This process is called Alpha-Beta pruning.
