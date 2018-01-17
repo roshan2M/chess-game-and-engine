@@ -2,7 +2,7 @@
 
 A chess game developed in Java. Utilizes object-oriented principles such as classes, inheritance, abstraction and others. Abstract classes are used for the Move (AttackingMove, CastleMove, etc.), Piece (Queen, Rook, Knight, etc.),  and Player (BlackPlayer, WhitePlayer, etc.) features. Below is a preview of the GUI.
 
-
+![preview](https://user-images.githubusercontent.com/21022624/35026905-b4bb4f72-fb1b-11e7-95f8-01d593613c58.JPG)
 
 I am also currently in the process of developing an engine for this game, which has been a challenging experience. The engine will use previous games in order to build a tree of possible moves and assign point-values to those moves. Then, the engine will use the Minimax algorithm to determine the best move for the next player. Assume there are 2 players MIN and MAX. As the name suggests, MIN wants to minimize the score and MAX wants to maximize the score.
 
