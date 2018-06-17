@@ -62,8 +62,10 @@ public abstract class Move {
 			}
 		}
 		for (final Piece piece : this.board.getCurrentPlayer().getOpponent().getActivePieces()) {
+			System.out.println(piece);
 			builder.setPiece(piece);
 		}
+		System.out.println("BREAK HERE 3");
 		//TODO Move the moved piece.
 		builder.setPiece(this.movedPiece.movePiece(this));
 		builder.setMoveMaker(this.board.getCurrentPlayer().getOpponent().getAlliance());
@@ -133,11 +135,6 @@ public abstract class Move {
 			}
 			final AttackMove otherAttackMove = (AttackMove) other;
 			return super.equals(otherAttackMove) && getAttackedPiece().equals(otherAttackMove.getAttackedPiece());
-		}
-
-		@Override
-		public Board execute() {
-			return null;
 		}
 		
 		@Override
@@ -277,12 +274,17 @@ public abstract class Move {
 	
 	public static final class NullMove extends Move {
 		public NullMove() {
-			super(null, -1);
+			super(null, 65);
 		}
 		
 		@Override
 		public Board execute() {
 			throw new RuntimeException("Cannot execute the null move.");
+		}
+		
+		@Override
+		public int getCurrentCoordinate() {
+			return -1;
 		}
 	}
 	
@@ -297,6 +299,7 @@ public abstract class Move {
 					return move;
 				}
 			}
+			System.out.println("FOUND A NULL MOVE");
 			return NULL_MOVE;
 		}
 	}

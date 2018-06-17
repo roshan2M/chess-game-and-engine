@@ -224,6 +224,7 @@ public class Table {
 						else {
 							destinationTile = chessBoard.getTile(tileId);
 							final Move move = MoveFactory.createMove(chessBoard, sourceTile.getTileCoordinate(), destinationTile.getTileCoordinate());
+							System.out.println(move);
 							final MoveTransition transition = chessBoard.getCurrentPlayer().makeMove(move);
 							if (transition.getMoveStatus().isDone()) {
 								chessBoard = transition.getTransitionBoard();
