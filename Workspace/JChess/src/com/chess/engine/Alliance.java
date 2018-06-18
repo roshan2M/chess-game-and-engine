@@ -13,6 +13,11 @@ public enum Alliance {
 		public int getDirection() {
 			return -1;
 		}
+		
+		@Override
+		public int getOppositeDirection() {
+			return BLACK.getDirection();
+		}
 
 		@Override
 		public boolean isBlack() {
@@ -34,6 +39,11 @@ public enum Alliance {
 		public int getDirection() {
 			return 1;
 		}
+		
+		@Override
+		public int getOppositeDirection() {
+			return WHITE.getDirection();
+		}
 
 		@Override
 		public boolean isBlack() {
@@ -52,6 +62,7 @@ public enum Alliance {
 	};
 	
 	public abstract int getDirection();
+	public abstract int getOppositeDirection();
 	public abstract boolean isBlack();
 	public abstract boolean isWhite();
 	public abstract Player choosePlayer(final WhitePlayer whitePlayer, final BlackPlayer blackPlayer);

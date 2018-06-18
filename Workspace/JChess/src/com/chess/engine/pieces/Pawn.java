@@ -9,6 +9,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Move.PawnAttackMove;
+import com.chess.engine.board.Move.PawnEnPassantAttackMove;
 import com.chess.engine.board.Move.PawnJump;
 import com.chess.engine.board.Move.PawnMove;
 import com.google.common.collect.ImmutableList;
@@ -64,6 +65,11 @@ public class Pawn extends Piece {
 						//TODO Deal with attack and promote at the same time.
 						legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
 					}
+				} else if (board.getEnPassantPawn() != null && board.getEnPassantPawn().getPiecePosition() - this.piecePosition == this.pieceAlliance.getOppositeDirection()) {
+					final Piece pieceOnCandidate = board.getEnPassantPawn();
+					if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+						legalMoves.add(new PawnEnPassantAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
+					}
 				}
 			}
 			else if (currentCandidateOffset == 9 && !((BoardUtils.FIRST_COLUMN[this.piecePosition] && this.getPieceAlliance().isWhite()) || (BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.getPieceAlliance().isBlack()))) {
@@ -72,6 +78,11 @@ public class Pawn extends Piece {
 					if (this.getPieceAlliance() != pieceOnCandidate.getPieceAlliance()) {
 						//TODO Deal with attack and promote at the same time.
 						legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
+					}
+				} else if (board.getEnPassantPawn() != null && board.getEnPassantPawn().getPiecePosition() - this.piecePosition == this.pieceAlliance.getDirection()) {
+					final Piece pieceOnCandidate = board.getEnPassantPawn();
+					if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+						legalMoves.add(new PawnEnPassantAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
 					}
 				}
 			}
