@@ -13,13 +13,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 public abstract class Player {
-	
+
 	protected final Board board;
 	protected final King playerKing;
 	protected final Collection<Move> legalMoves;
-	
+
 	private final boolean isInCheck;
-	
+
 	Player(final Board board, final Collection<Move> legalMoves, final Collection<Move> opponentMoves) {
 		this.board = board;
 		this.playerKing = establishKing();
@@ -45,31 +45,40 @@ public abstract class Player {
 		}
 		throw new RuntimeException("Invalid Board");
 	}
-	
+
 	public King getPlayerKing() {
 		return this.playerKing;
 	}
-	
+
 	public Collection<Move> getLegalMoves() {
 		return this.legalMoves;
 	}
-	
+
 	public boolean isMoveLegal(final Move move) {
 		return this.legalMoves.contains(move);
 	}
-	
+
 	public boolean isInCheck() {
+		if (this.isInCheck) {
+			System.out.println("CHECK HERE");
+		}
 		return this.isInCheck;
 	}
-	
+
 	public boolean isInCheckMate() {
+		if (this.isInCheck && !hasEscapeMoves()) {
+			System.out.println("CHECKMATE HERE");
+		}
 		return this.isInCheck && !hasEscapeMoves();
 	}
-	
+
 	public boolean isInStaleMate() {
+		if (!this.isInCheck && !hasEscapeMoves()) {
+			System.out.println("STALEMATE HERE");
+		}
 		return !this.isInCheck && !hasEscapeMoves();
 	}
-	
+
 	protected boolean hasEscapeMoves() {
 		for (final Move move : this.legalMoves) {
 			final MoveTransition transition = makeMove(move);
@@ -79,11 +88,11 @@ public abstract class Player {
 		}
 		return false;
 	}
-	
+
 	public boolean isCastled() {
 		return false;
 	}
-	
+
 	public MoveTransition makeMove(final Move move) {
 		if (!isMoveLegal(move)) {
 			return new MoveTransition(this.board, move, MoveStatus.ILLEGAL_MOVE);
@@ -91,7 +100,7 @@ public abstract class Player {
 		final Board transitionBoard = move.execute();
 		System.out.println(transitionBoard);
 		final Collection<Move> kingAttacks = Player.calculateAttacksOnTile(transitionBoard.getCurrentPlayer().getOpponent().getPlayerKing().getPiecePosition(), transitionBoard.getCurrentPlayer().getLegalMoves());
-		
+
 		if (!kingAttacks.isEmpty()) {
 			return new MoveTransition(this.board, move, MoveStatus.LEAVES_PLAYER_IN_CHECK);
 		}
@@ -101,7 +110,7 @@ public abstract class Player {
 	public abstract Collection<Piece> getActivePieces();
 	public abstract Alliance getAlliance();
 	public abstract Player getOpponent();
-	
+
 	protected abstract Collection<Move> calculateKingCastles(Collection<Move> playerLegalMoves, Collection<Move> opponentsLegalMoves);
-	
+
 }
