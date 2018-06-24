@@ -54,7 +54,7 @@ public class MiniMax implements MoveStrategy {
 	}
 
 	public static boolean isEndGameScenario(final Board board) {
-		return board.getWhitePlayer().isInCheckMate() || board.getBlackPlayer().isInCheckMate();
+		return board.getCurrentPlayer().isInCheckMate() || board.getCurrentPlayer().isInStaleMate();
 	}
 
 	public int minimumLayer(final Board board, final int depth) {
