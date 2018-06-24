@@ -53,8 +53,12 @@ public class MiniMax implements MoveStrategy {
 		return bestMove;
 	}
 
+	public static boolean isEndGameScenario(final Board board) {
+		return board.getWhitePlayer().isInCheckMate() || board.getBlackPlayer().isInCheckMate();
+	}
+
 	public int minimumLayer(final Board board, final int depth) {
-		if (depth <= 0 /* or checkmate */) {
+		if (depth <= 0 || isEndGameScenario(board)) {
 			return this.boardEvaluator.evaluate(board, depth);
 		}
 		int lowestSeenValue = Integer.MAX_VALUE;
@@ -68,7 +72,7 @@ public class MiniMax implements MoveStrategy {
 	}
 
 	public int maximumLayer(final Board board, final int depth) {
-		if (depth <= 0 /* or checkmate */) {
+		if (depth <= 0 || isEndGameScenario(board)) {
 			return this.boardEvaluator.evaluate(board, depth);
 		}
 		int highestSeenValue = Integer.MIN_VALUE;

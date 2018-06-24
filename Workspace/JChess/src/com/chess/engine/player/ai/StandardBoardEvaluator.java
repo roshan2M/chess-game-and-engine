@@ -9,6 +9,8 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
 	// Heuristic values for the board evaluator.
 	private static final int CHECK_BONUS = 50;
 	private static final int CHECKMATE_BONUS = 10000;
+	private static final int DEPTH_BONUS = 100;
+	private static final int CASTLE_BONUS = 150;
 
 	@Override
 	public int evaluate(final Board board, final int depth) {
@@ -17,7 +19,7 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
 	}
 
 	private static int scorePlayer(final Board board, final Player player, final int depth) {
-		return pieceValue(player) + mobility(player) + check(player) + checkmate(player, depth);
+		return pieceValue(player) + mobility(player) + check(player) + checkmate(player, depth) + castled(player);
 	}
 
 	private static int pieceValue(final Player player) {
@@ -28,8 +30,12 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
 		return totalPiecesValue;
 	}
 
-	private static int depthBonus(int depth) {
-		return depth == 0 ? 1 : 100 * depth;
+	private static int depthBonus(final int depth) {
+		return depth == 0 ? 1 : DEPTH_BONUS * depth;
+	}
+
+	private static int castled(final Player player) {
+		return player.isCastled() ? CASTLE_BONUS : 0;
 	}
 
 	private static int mobility(final Player player) {
