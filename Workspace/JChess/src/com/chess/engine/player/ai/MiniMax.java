@@ -7,9 +7,11 @@ import com.chess.engine.player.MoveTransition;
 public class MiniMax implements MoveStrategy {
 
 	private final BoardEvaluator boardEvaluator;
+	private final int searchDepth;
 
-	public MiniMax(BoardEvaluator boardEvaluator) {
+	public MiniMax(final BoardEvaluator boardEvaluator, final int searchDepth) {
 		this.boardEvaluator = boardEvaluator;
+		this.searchDepth = searchDepth;
 	}
 
 	@Override
@@ -18,13 +20,13 @@ public class MiniMax implements MoveStrategy {
 	}
 
 	@Override
-	public Move execute(Board board, int depth) {
+	public Move execute(Board board) {
 		final long startTime = System.currentTimeMillis();
 		Move bestMove = null;
 		int highestSeenValue = Integer.MIN_VALUE;
 		int lowestSeenValue = Integer.MAX_VALUE;
 		int currentValue = 0;
-		System.out.println(board.getCurrentPlayer() + " THINKING with depth = " + depth);
+		System.out.println(board.getCurrentPlayer() + " THINKING with depth = " + searchDepth);
 
 		int numMoves = board.getCurrentPlayer().getLegalMoves().size();
 
@@ -32,14 +34,14 @@ public class MiniMax implements MoveStrategy {
 			final MoveTransition moveTransition = board.getCurrentPlayer().makeMove(move);
 			if (moveTransition.getMoveStatus().isDone()) {
 				if (board.getCurrentPlayer().getAlliance().isWhite()) {
-					currentValue = minimumLayer(moveTransition.getTransitionBoard(), depth - 1);
+					currentValue = minimumLayer(moveTransition.getTransitionBoard(), searchDepth - 1);
 					if (currentValue > highestSeenValue) {
 						highestSeenValue = currentValue;
 						bestMove = move;
 					}
 				}
 				else {
-					currentValue = maximumLayer(moveTransition.getTransitionBoard(), depth - 1);
+					currentValue = maximumLayer(moveTransition.getTransitionBoard(), searchDepth - 1);
 					if (currentValue < lowestSeenValue) {
 						lowestSeenValue = currentValue;
 						bestMove = move;
