@@ -16,6 +16,7 @@ public abstract class Move {
 	protected final boolean isFirstMove;
 
 	public static final Move NULL_MOVE = new NullMove();
+	public static final String ATTACK_MOVE_DELIMITER = "x";
 
 	private Move(final Board board, final Piece movedPiece, final int destinationCoordinate) {
 		this.board = board;
@@ -170,7 +171,8 @@ public abstract class Move {
 
 		@Override
 		public String toString() {
-			return movedPiece.getPieceType().toString() + "x" + BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
+			return movedPiece.getPieceType().toString() + ATTACK_MOVE_DELIMITER +
+					BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
 		}
 	}
 
@@ -250,7 +252,7 @@ public abstract class Move {
 
 		@Override
 		public String toString() {
-			return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0, 1) + "x" +
+			return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0, 1) + ATTACK_MOVE_DELIMITER +
 				   BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
 		}
 	}
@@ -278,8 +280,9 @@ public abstract class Move {
 					builder.setPiece(piece);
 				}
 			}
-			//TODO Move the moved piece.
-			builder.setPiece(this.movedPiece.movePiece(this));
+			final Pawn movedPawn = (Pawn) this.movedPiece.movePiece(this);
+			builder.setPiece(movedPawn);
+
 			builder.setMoveMaker(this.board.getCurrentPlayer().getOpponent().getAlliance());
 			return builder.build();
 		}
@@ -318,7 +321,6 @@ public abstract class Move {
 		protected final int castleRookStart;
 		protected final int castleRookDestination;
 
-
 		public CastleMove(final Board board, final Piece movedPiece, final int destinationCoordinate, final Rook castleRook, final int castleRookStart, final int castleRookDestination) {
 			super(board, movedPiece, destinationCoordinate);
 			this.castleRook = castleRook;
@@ -339,7 +341,7 @@ public abstract class Move {
 		public Board execute() {
 			final Builder builder = new Builder();
 			for (final Piece piece : this.board.getCurrentPlayer().getActivePieces()) {
-				if (!this.movedPiece.equals(piece) && !this.movedPiece.equals(castleRook)) {
+				if (!this.movedPiece.equals(piece) && !this.castleRook.equals(piece)) {
 					builder.setPiece(piece);
 				}
 			}
@@ -348,7 +350,7 @@ public abstract class Move {
 			}
 			builder.setPiece(this.movedPiece.movePiece(this));
 			//TODO Look into the first move on normal pieces.
-			builder.setPiece(new Rook(this.castleRookDestination, this.castleRook.getPieceAlliance()));
+			builder.setPiece(new Rook(this.castleRookDestination, this.castleRook.getPieceAlliance(), false));
 			builder.setMoveMaker(this.board.getCurrentPlayer().getOpponent().getAlliance());
 			return builder.build();
 		}
@@ -429,7 +431,6 @@ public abstract class Move {
 		}
 
 		public static Move createMove(final Board board, final int currentCoordinate, final int destinationCoordinate) {
-			System.out.println("All legal moves: " + board.getAllLegalMoves());
 			for (final Move move : board.getAllLegalMoves()) {
 				if (move.getCurrentCoordinate() == currentCoordinate && move.getDestinationCoordinate() == destinationCoordinate) {
 					return move;

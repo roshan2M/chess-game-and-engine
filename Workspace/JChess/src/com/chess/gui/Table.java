@@ -1,14 +1,17 @@
 package com.chess.gui;
 
-import static javax.swing.SwingUtilities.invokeLater;
-import static javax.swing.SwingUtilities.isLeftMouseButton;
-import static javax.swing.SwingUtilities.isRightMouseButton;
+import com.chess.engine.board.Board;
+import com.chess.engine.board.BoardUtils;
+import com.chess.engine.board.Move;
+import com.chess.engine.board.Move.MoveFactory;
+import com.chess.engine.board.Tile;
+import com.chess.engine.pieces.Piece;
+import com.chess.engine.player.MoveTransition;
+import com.google.common.collect.Lists;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -21,24 +24,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-
-import com.chess.engine.board.Board;
-import com.chess.engine.board.BoardUtils;
-import com.chess.engine.board.Move;
-import com.chess.engine.board.Move.MoveFactory;
-import com.chess.engine.board.Tile;
-import com.chess.engine.pieces.Piece;
-import com.chess.engine.player.MoveTransition;
-import com.google.common.collect.Lists;
+import static javax.swing.SwingUtilities.*;
 
 public class Table {
 
@@ -53,7 +39,7 @@ public class Table {
 	private Tile destinationTile;
 	private Piece humanMovedPiece;
 	private BoardDirection boardDirection;
-	
+
 	private boolean highlightLegalMoves;
 
 	private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(700, 600);
@@ -131,13 +117,13 @@ public class Table {
 				highlightLegalMoves = legalMoveHighlighterCheckbox.isSelected();
 			}
 		});
-		preferencesMenu.add(legalMoveHighlighterCheckbox);		
+		preferencesMenu.add(legalMoveHighlighterCheckbox);
 		return preferencesMenu;
 	}
-	
+
 	public class BoardPanel extends JPanel {
 		final List<TilePanel> boardTiles;
-		
+
 		BoardPanel() {
 			super(new GridLayout(8, 8));
 			this.boardTiles = new ArrayList<>();
@@ -161,49 +147,49 @@ public class Table {
 			repaint();
 		}
 	}
-	
+
 	public static class MoveLog {
 		private final List<Move> moves;
-		
+
 		MoveLog() {
 			this.moves = new ArrayList<>();
 		}
-		
+
 		public List<Move> getMoves() {
 			return this.moves;
 		}
-		
+
 		public void addMove(final Move move) {
 			moves.add(move);
 		}
-		
+
 		public Move removeMove(final int index) {
 			return this.moves.remove(index);
 		}
-		
+
 		public boolean removeMove(final Move move) {
 			return this.moves.remove(move);
 		}
-		
+
 		public int size() {
 			return this.moves.size();
 		}
-		
+
 		public void clear() {
 			this.moves.clear();
 		}
 	}
-	
+
 	private class TilePanel extends JPanel {
 		private final int tileId;
-		
+
 		TilePanel(final BoardPanel boardPanel, final int tileId) {
 			super(new GridBagLayout());
 			this.tileId = tileId;
 			setPreferredSize(TILE_PANEL_DIMENSION);
 			assignTileColor();
 			assignTilePieceIcon(chessBoard);
-			
+
 			addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(final MouseEvent event) {
@@ -224,7 +210,6 @@ public class Table {
 						else {
 							destinationTile = chessBoard.getTile(tileId);
 							final Move move = MoveFactory.createMove(chessBoard, sourceTile.getTileCoordinate(), destinationTile.getTileCoordinate());
-							System.out.println(move);
 							final MoveTransition transition = chessBoard.getCurrentPlayer().makeMove(move);
 							if (transition.getMoveStatus().isDone()) {
 								chessBoard = transition.getTransitionBoard();
@@ -247,27 +232,27 @@ public class Table {
 
 				@Override
 				public void mouseEntered(final MouseEvent e) {
-					
+
 				}
 
 				@Override
 				public void mouseExited(final MouseEvent e) {
-					
+
 				}
 
 				@Override
 				public void mousePressed(final MouseEvent e) {
-					
+
 				}
 
 				@Override
 				public void mouseReleased(final MouseEvent e) {
-					
+
 				}
 			});
 			validate();
 		}
-		
+
 		public void drawTile(final Board board) {
 			assignTileColor();
 			assignTilePieceIcon(board);
@@ -275,7 +260,7 @@ public class Table {
 			validate();
 			repaint();
 		}
-		
+
 		private void highlightLegals(Board board) {
 			if (highlightLegalMoves) {
 				for (final Move move : pieceLegalMoves(board)) {
@@ -289,7 +274,7 @@ public class Table {
 				}
 			}
 		}
-		
+
 		private Collection<Move> pieceLegalMoves(Board board) {
 			if (humanMovedPiece != null && humanMovedPiece.getPieceAlliance() == board.getCurrentPlayer().getAlliance()) {
 				return humanMovedPiece.calculateLegalMoves(board);
@@ -319,12 +304,12 @@ public class Table {
 				setBackground(this.tileId % 2 == 0 ? darkTileColor : lightTileColor);
 			}
 		}
-		
+
 		private void setTileColor(Color color) {
 			setBackground(color);
 		}
 	}
-	
+
 	public enum BoardDirection {
 		NORMAL {
 			@Override
@@ -351,5 +336,5 @@ public class Table {
 		abstract List<TilePanel> traverse(final List<TilePanel> boardTiles);
 		abstract BoardDirection opposite();
 	}
-	
+
 }
